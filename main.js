@@ -13,6 +13,11 @@ let playButton = document.getElementById("play-button");
 let userInput = document.getElementById("user-input");
 let resultArea = document.getElementById("result-area");
 let resetButton = document.getElementById("reset-button");
+let chances = 5;
+let gameOver = false;
+let chanceArea = document.getElementById("chance-area");
+
+
 
 playButton.addEventListener("click", play)
 resetButton.addEventListener("click", Reset)
@@ -23,15 +28,35 @@ function pickRandomNumber() {
 }
 
 function play() {
+
     let userValue = userInput.value;
-    if(userValue < computerNum) {
+
+    chanceArea.textContent = "Remaining Chances: " + `${chances-1}`;
+    chances --;
+    console.log("chance", chances);
+
+   
+    if (userValue < computerNum) {
         resultArea.textContent = "Up!";
     } else if (userValue > computerNum) {
         resultArea.textContent = "Down!";
     } else {
         resultArea.textContent = "You are correct!";
     }
+
+    if(chances < 1) {
+        gameOver = true;
+    
+    }
+
+    if (gameOver == true) {
+        
+        resultArea.textContent = "Oh no. You are done! The result was" + `${computerNum}`
+        playButton.disabled = true;
+
+    }
 }
+
 
 
 function Reset() {

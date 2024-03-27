@@ -12,9 +12,10 @@ let computerNum = 0;
 let playButton = document.getElementById("play-button");
 let userInput = document.getElementById("user-input");
 let resultArea = document.getElementById("result-area");
+let resetButton = document.getElementById("reset-button");
 
 playButton.addEventListener("click", play)
-
+resetButton.addEventListener("click", Reset)
 
 function pickRandomNumber() {
     computerNum = Math.floor(Math.random() * 100)+1;
@@ -32,4 +33,13 @@ function play() {
     }
 }
 
+
+function Reset() {
+   // Cleans up user input
+   // New number generated
+   userInput.value = "";
+   pickRandomNumber();
+   resultArea.textContent = "Result here";
+}
 pickRandomNumber();
+

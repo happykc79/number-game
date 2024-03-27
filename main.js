@@ -11,6 +11,7 @@
 let computerNum = 0;
 let playButton = document.getElementById("play-button");
 let userInput = document.getElementById("user-input");
+let resultArea = document.getElementById("result-area");
 
 playButton.addEventListener("click", play)
 
@@ -22,7 +23,13 @@ function pickRandomNumber() {
 
 function play() {
     let userValue = userInput.value;
-    console.log(userValue);
+    if(userValue < computerNum) {
+        resultArea.textContent = "Up!";
+    } else if (userValue > computerNum) {
+        resultArea.textContent = "Down!";
+    } else {
+        resultArea.textContent = "You are correct!";
+    }
 }
 
 pickRandomNumber();

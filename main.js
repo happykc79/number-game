@@ -1,5 +1,5 @@
-// Choose random number | Done!
-// User inputs number and click on go button | Done!
+// Choose random number 
+// User inputs number and click on go button 
 // If number is correct, show "You are correct!"
 // If number is < user number, show "Down!"
 // If number is > user number, show "Up!"
@@ -16,11 +16,14 @@ let resetButton = document.getElementById("reset-button");
 let chances = 5;
 let gameOver = false;
 let chanceArea = document.getElementById("chance-area");
-
+let history=[]
 
 
 playButton.addEventListener("click", play)
 resetButton.addEventListener("click", Reset)
+userInput.addEventListener("focus", function() {
+    userInput.value="";
+});
 
 function pickRandomNumber() {
     computerNum = Math.floor(Math.random() * 100)+1;
@@ -31,8 +34,18 @@ function play() {
 
     let userValue = userInput.value;
 
-    chanceArea.textContent = "Remaining Chances: " + `${chances-1}`;
+    if(userValue<1 || userValue > 100) {
+        resultArea.textContent = "Please enter a number between 1-100";
+        return;
+    }
+
+    if(history.includes(userValue)) {
+        resultArea.textContent = "You have already entered this number";
+        return;
+    }
+
     chances --;
+    chanceArea.textContent = "Remaining Chances: " + `${chances-1}`;
     console.log("chance", chances);
 
    
@@ -42,7 +55,12 @@ function play() {
         resultArea.textContent = "Down!";
     } else {
         resultArea.textContent = "You are correct!";
+        gameOver = true;
     }
+
+    history.push(userValue) 
+        console.log(history);
+    
 
     if(chances < 1) {
         gameOver = true;
@@ -50,11 +68,10 @@ function play() {
     }
 
     if (gameOver == true) {
-        
-        resultArea.textContent = "Oh no. You are done! The result was" + `${computerNum}`
         playButton.disabled = true;
-
     }
+
+    
 }
 
 

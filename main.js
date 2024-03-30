@@ -34,7 +34,7 @@ function play() {
 
     let userValue = userInput.value;
 
-    if(userValue<1 || userValue > 100) {
+    if(userValue < 1 || userValue > 100) {
         resultArea.textContent = "Please enter a number between 1-100";
         return;
     }
@@ -45,7 +45,7 @@ function play() {
     }
 
     chances --;
-    chanceArea.textContent = "Remaining Chances: " + `${chances-1}`;
+    chanceArea.textContent = "Remaining Chances: " + `${chances}`;
     console.log("chance", chances);
 
    
